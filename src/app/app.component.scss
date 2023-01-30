@@ -1,0 +1,7 @@
+.task-card:has(input:not(:checked)) {
+  border: 1px solid #ff0000;
+}
+
+.task-card:has(input[type="checkbox"]:has(:checked)) {
+  border: 1px solid green;
+}

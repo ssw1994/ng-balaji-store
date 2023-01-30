@@ -1,0 +1,19 @@
+<div class="h-100">
+  <div class="h-100">
+    <!-- <img [attr.src]="currentImage" *ngIf="currentImage" /> -->
+    <div
+      class="image-item"
+      [ngStyle]="{ 'background-image': 'url(' + currentImage + ')' }"
+      *ngIf="currentImage"
+    ></div>
+
+    <div class="image-dots">
+      <button
+        class="dot"
+        *ngFor="let image of images; let i = index"
+        [ngClass]="{ 'active-image': currentIndex == i }"
+        (click)="setImage(i)"
+      ></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+:host {
+  width: 100%;
+  background: lightblue;
+  position: fixed;
+  top: 0;
+  height: 50px;
+  z-index: 1;
+}
+.app-product-search-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .search-input {
+    input {
+      width: 450px;
+      height: 30px;
+    }
+    .search-btn {
+      height: 35px;
+    }
+  }
+}
