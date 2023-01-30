@@ -18,6 +18,7 @@ const connection = require("./server/utils/connection");
 connection();
 
 app.use("/api/products", require("./server/routes/product.routes"));
+app.use("/api/users", require("./server/routes/user.routes"));
 
 http.createServer(app).listen(PORT, () => {
   console.log(msg);
