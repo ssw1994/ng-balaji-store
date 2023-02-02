@@ -7,18 +7,25 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class BaseUrlInterceptor implements HttpInterceptor {
-  baseUrl = 'http://localhost:5000/api/';
-
   constructor() {}
+
+  get userId(): string {
+    const userId = localStorage.getItem('userId');
+    return userId ? userId : '';
+  }
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     alert();
-    const req = request.clone({ url: this.baseUrl + request.url });
+    const req = request.clone({
+      headers: request.headers.set('balaji_user_id', this.userId),
+    });
     return next.handle(req);
   }
 }

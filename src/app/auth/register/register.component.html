@@ -1,0 +1,52 @@
+<div>
+  <div class="login-form" [formGroup]="registerForm">
+    <div>
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Username"
+        name="username"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Email"
+        name="email"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        formControlName="mobile"
+        placeholder="Mobile"
+        name="mobile"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        formControlName="password"
+        placeholder="Password"
+        name="password"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        formControlName="repassword"
+        placeholder="Reenter password"
+        name="repassword"
+      />
+    </div>
+    <div>
+      <button (click)="register()" [disabled]="registerForm.invalid">
+        Register
+      </button>
+    </div>
+    <div>
+      <a routerLink="/auth/login">Login</a>
+    </div>
+  </div>
+</div>

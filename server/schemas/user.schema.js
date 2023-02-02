@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 const UserSchema = new Schema({
   username: {
@@ -18,6 +18,9 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
+  },
+  cart_id: {
+    type: mongoose.SchemaTypes.ObjectId,
   },
 });
 

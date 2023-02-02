@@ -1,0 +1,17 @@
+:host {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  z-index: 1;
+  height: 50px;
+}
+
+.top-user-control {
+  width: fit-content;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}

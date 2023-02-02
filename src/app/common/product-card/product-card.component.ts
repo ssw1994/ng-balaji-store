@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -9,7 +10,12 @@ export class ProductCardComponent implements OnInit {
   @Input()
   product: any;
 
-  constructor() {}
+  @HostListener('click')
+  async onClick() {
+    await this.router.navigate(['/', 'products', 'details', this.product._id]);
+  }
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 }

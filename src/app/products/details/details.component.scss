@@ -1,0 +1,29 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.product-details {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  & > div {
+    width: 50%;
+    padding: 15px;
+  }
+
+  .item-images {
+    height: 500px;
+    width: 40%;
+  }
+
+  .item-details {
+    line-height: 2;
+  }
+
+  .user-cart-options {
+    display: flex;
+    gap: 5px;
+  }
+}

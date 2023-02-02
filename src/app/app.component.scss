@@ -5,3 +5,7 @@
 .task-card:has(input[type="checkbox"]:has(:checked)) {
   border: 1px solid green;
 }
+
+.app-body {
+  margin-top: 100px;
+}

@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-media">
-    <app-img-gallery [images]="product.images"></app-img-gallery>
+    <app-img-gallery
+      [images]="product.images"
+      [preview]="false"
+    ></app-img-gallery>
   </div>
   <div class="card-header">{{ product.title }}</div>
   <div class="card-body"><div [innerHTML]="product.description"></div></div>

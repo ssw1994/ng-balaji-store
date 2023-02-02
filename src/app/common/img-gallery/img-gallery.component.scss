@@ -6,10 +6,26 @@
 .h-100 {
   height: 100%;
 }
-.image-item {
-  width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
+
+.item-images {
+  display: flex;
+  flex-direction: row;
+  .image-item {
+    width: 85%;
+    height: 100%;
+    background-size: 100% 100%;
+  }
+  .preview-box {
+    height: 100%;
+    width: 15%;
+
+    .preview-window {
+      height: 90%;
+      width: 100%;
+      background-size: 90% 100%;
+      margin: 2px 0;
+    }
+  }
 }
 
 .image-dots {

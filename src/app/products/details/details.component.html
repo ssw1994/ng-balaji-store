@@ -1,0 +1,49 @@
+<div *ngIf="productDetails" class="product-details">
+  <div class="item-images">
+    <app-img-gallery
+      [images]="productDetails.images"
+      [preview]="true"
+    ></app-img-gallery>
+  </div>
+  <div class="item-details">
+    <div>
+      <div>
+        <h1>
+          {{ productDetails.title }}<br />
+          <h4>{{ productDetails.brand }}</h4>
+        </h1>
+      </div>
+    </div>
+    <div>
+      <div [innerHTML]="productDetails.description"></div>
+    </div>
+    <div>
+      <label>Price : </label>
+      <strong> {{ productDetails.price }} </strong>
+    </div>
+    <div>
+      <label>Discount : </label>
+      <strong>{{ productDetails.discountPercentage }}</strong>
+    </div>
+    <div>
+      <label>Rating : </label>
+      <strong>{{ productDetails.rating }}</strong>
+      <app-star-rating
+        [rating]="productDetails.rating"
+        [editable]="false"
+      ></app-star-rating>
+    </div>
+
+    <div class="user-cart-options">
+      <app-item-quantity
+        [max]="productDetails.stock"
+        [min]="1"
+        (getQuantity)="getQuantity($event)"
+      ></app-item-quantity>
+      <button color="primary" mat-raised-button (click)="addToCart()">
+        <mat-icon>add_shopping_cart</mat-icon>
+        &nbsp;&nbsp; Add to cart
+      </button>
+    </div>
+  </div>
+</div>

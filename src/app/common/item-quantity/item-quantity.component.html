@@ -1,0 +1,25 @@
+<div>
+  <button
+    (click)="decrement()"
+    mat-raised-button
+    color="primary"
+    [disabled]="isMinValue"
+  >
+    <mat-icon>remove</mat-icon>
+  </button>
+  <input
+    type="number"
+    [formControl]="quantity"
+    placeholder="Quantity"
+    readonly
+    class="quantity-input"
+  />
+  <button
+    (click)="increment()"
+    mat-raised-button
+    color="primary"
+    [disabled]="isMaxValue"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

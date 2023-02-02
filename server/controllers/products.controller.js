@@ -1,3 +1,4 @@
+const { CartModel } = require("../schemas/cart.schema");
 const { ProductModel } = require("../schemas/products");
 const fetchProducts = async (req, res, next) => {
   try {
@@ -11,16 +12,12 @@ const fetchProducts = async (req, res, next) => {
 const addtoCart = async (req, res, next) => {
   try {
     const { id, item } = req.body;
-    ProductModel.updateOne(
+    console.log(id, item);
+    const data = await CartModel.findOneAndUpdate(
       { _id: id },
-      { $push: { items: item } },
-      (error, response) => {
-        if (error) {
-          next({ error });
-        }
-        res.send(response).json().status(200);
-      }
-    );
+      { $push: { items: item } }
+    ).exec();
+    res.send({ data }).json().status(200);
   } catch (error) {
     next({ error });
   }
@@ -44,8 +41,28 @@ const removeFromCart = async (req, res, next) => {
   }
 };
 
+const fetchProductsDetails = async (req, res, next) => {
+  try {
+    const id = req.query["id"];
+    if (id) {
+      const data = await ProductModel.findById(id);
+      res.send({ data }).json().status(200);
+    } else {
+      res
+        .send({
+          message: "No product found with id" + id,
+        })
+        .json()
+        .status(404);
+    }
+  } catch (error) {
+    next({ error });
+  }
+};
+
 module.exports = {
   fetchProducts,
   addtoCart,
   removeFromCart,
+  fetchProductsDetails,
 };

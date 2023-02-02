@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -96,15 +97,28 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "3abcdd9e-a1f6-4fa6-92fb-dda744a4049a"
+    "analytics": "3abcdd9e-a1f6-4fa6-92fb-dda744a4049a",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

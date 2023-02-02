@@ -9,6 +9,9 @@ export class ImgGalleryComponent implements OnInit {
   @Input()
   images: Array<string>;
 
+  @Input()
+  preview = false;
+
   private _currentIndex = 0;
 
   get currentIndex(): number {
@@ -21,6 +24,10 @@ export class ImgGalleryComponent implements OnInit {
 
   get currentImage(): string | undefined {
     return this.images.at(this.currentIndex);
+  }
+
+  get previewHeight(): string {
+    return 100 / this.images.length + '%';
   }
 
   constructor() {}
