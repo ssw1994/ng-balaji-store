@@ -12,13 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ItemQuantityComponent } from './item-quantity/item-quantity.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { MyCartComponent } from '../carts';
-
+import { MatBadgeModule } from '@angular/material/badge';
 const shared = [
   MatIconModule,
   MatCardModule,
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
+  MatBadgeModule,
 ];
 
 @NgModule({
