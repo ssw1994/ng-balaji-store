@@ -1,4 +1,11 @@
 <div class="app-header">
+  <div class="store-icon">
+    <button mat-raised-button (click)="home()">
+      <mat-icon>shopping_cart</mat-icon>
+      Balaji Store
+    </button>
+  </div>
+
   <div class="top-user-control">
     <app-my-cart></app-my-cart>
     <button mat-raised-button color="primary" (click)="handleAction()">

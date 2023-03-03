@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cart Summary</mat-card-title>
+    <mat-divider></mat-divider>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="summary-details">
+      <div>
+        <label> Price({{ noOfItems }}) </label>
+        <label>{{ orderTotal }}</label>
+      </div>
+      <div>
+        <label> Discount </label>
+        <label>{{ discount }}</label>
+      </div>
+      <div>
+        <label> Delivery Charges </label>
+        <label>{{ deliveryCharges }}</label>
+      </div>
+
+      <div>
+        <label> Total Amount </label>
+        <label>{{ totalAmount }}</label>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

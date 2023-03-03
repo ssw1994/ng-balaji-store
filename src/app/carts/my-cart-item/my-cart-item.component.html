@@ -1,0 +1,37 @@
+<div class="cart_item">
+  <div>
+    <app-img-gallery [images]="cartItem.images"></app-img-gallery>
+  </div>
+  <div>
+    <div>
+      <strong class="item_title">{{ cartItem.title }}</strong>
+      <h3>{{ cartItem.brand }}</h3>
+      <h4>{{ cartItem.category }}</h4>
+    </div>
+    <div>
+      {{ cartItem.description }}
+    </div>
+    <div>
+      <strong class="item_price">{{ cartItem.price }}</strong>
+      <h3>
+        applied discount percentage
+        <mat-chip color="primary">{{ cartItem.discountPercentage }}</mat-chip>
+      </h3>
+    </div>
+    <div class="actions">
+      <div>
+        <app-item-quantity
+          [max]="cartItem.stock"
+          [min]="1"
+          (getQuantity)="getQuantity($event)"
+        ></app-item-quantity>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="removeFromCart()">
+          REMOVE
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

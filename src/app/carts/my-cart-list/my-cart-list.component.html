@@ -1,1 +1,27 @@
-<p>my-cart-list works!</p>
+<ng-template #empty_cart>
+  <div class="empty_cart">
+    <div>
+      <strong> Empty Cart </strong>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="home()">
+        Contine Shopping
+      </button>
+    </div>
+  </div>
+</ng-template>
+<div class="cart_list">
+  <div class="cart_item_list">
+    <ng-container *ngIf="myItems && myItems.length > 0; else empty_cart">
+      <app-my-cart-item
+        *ngFor="let item of myItems"
+        [cartItem]="item"
+        [cartId]="cartId"
+      ></app-my-cart-item>
+    </ng-container>
+  </div>
+
+  <div class="cart_summary">
+    <app-my-cart-summary></app-my-cart-summary>
+  </div>
+</div>

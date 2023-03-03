@@ -19,4 +19,26 @@ export class CartsService {
       })
     );
   }
+
+  getCartItems(id: string) {
+    return this.http
+      .get(environment.apiUrl + `carts/items?id=${id}`, {
+        observe: 'response',
+      })
+      .pipe(map((t) => t.body));
+  }
+
+  removeFromCart(id: string, cartId: string) {
+    return this.http
+      .post(
+        environment.apiUrl + `carts/remove?id=${cartId}`,
+        {
+          product_id: id,
+        },
+        {
+          observe: 'response',
+        }
+      )
+      .pipe(map((t) => t.body));
+  }
 }

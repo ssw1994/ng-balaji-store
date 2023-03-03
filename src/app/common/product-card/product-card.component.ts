@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,11 +12,16 @@ export class ProductCardComponent implements OnInit {
   product: any;
 
   @HostListener('click')
-  async onClick() {
-    await this.router.navigate(['/', 'products', 'details', this.product._id]);
+  onClick() {
+    this.navigationService.setPage(this.product.title, [
+      '/',
+      'products',
+      'details',
+      this.product._id,
+    ]);
   }
 
-  constructor(private router: Router) {}
+  constructor(private navigationService: NavigationService) {}
 
   ngOnInit(): void {}
 }

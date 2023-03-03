@@ -36,8 +36,8 @@ export class LoginComponent {
             if (localStorage) {
               localStorage.setItem('userId', response.id);
               localStorage.setItem('cartId', response.cartId);
+              await this.router.navigate(['/', 'products']);
             }
-            await this.router.navigate(['/', 'products']);
           }
         });
     } catch (error) {

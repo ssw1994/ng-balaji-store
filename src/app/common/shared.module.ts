@@ -13,6 +13,9 @@ import { ItemQuantityComponent } from './item-quantity/item-quantity.component';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { MyCartComponent } from '../carts';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { AddressComponent } from './address/address.component';
 const shared = [
   MatIconModule,
   MatCardModule,
@@ -20,6 +23,8 @@ const shared = [
   MatFormFieldModule,
   MatInputModule,
   MatBadgeModule,
+  MatChipsModule,
+  MatDividerModule,
 ];
 
 @NgModule({
@@ -30,6 +35,7 @@ const shared = [
     HeaderComponent,
     ItemQuantityComponent,
     StarRatingComponent,
+    AddressComponent,
   ],
   imports: [
     CommonModule,

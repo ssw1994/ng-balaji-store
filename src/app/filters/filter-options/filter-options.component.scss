@@ -7,18 +7,48 @@
   z-index: 1;
 }
 .app-product-search-bar {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  .search-input {
+
+  & > div {
+    display: flex;
     margin: 8px 0;
-    input {
-      width: 450px;
-      height: 30px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid gray;
+    width: max-content;
+    height: max-content;
+    border-radius: 5px;
+
+    @media screen and (max-width: 400px) {
+      flex-direction: column;
     }
-    .search-btn {
-      height: 35px;
+
+    .search-input {
+      input {
+        width: 450px;
+        height: 30px;
+        border: none;
+        border-radius: 0px;
+
+        &:focus-visible {
+          outline-offset: 0 !important;
+          outline: none !important;
+        }
+      }
+
+      .search-btn {
+        height: 35px;
+      }
+    }
+    select {
+      border: none;
+      border-radius: 0px;
+      &:focus-visible {
+        outline-offset: 0 !important;
+        outline: none !important;
+      }
     }
   }
 }

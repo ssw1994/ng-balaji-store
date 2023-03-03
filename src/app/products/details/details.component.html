@@ -35,11 +35,14 @@
     </div>
 
     <div class="user-cart-options">
-      <app-item-quantity
+      <!-- <app-item-quantity
         [max]="productDetails.stock"
         [min]="1"
         (getQuantity)="getQuantity($event)"
-      ></app-item-quantity>
+      ></app-item-quantity> -->
+      <button color="secondary" mat-raised-button (click)="saveForLater()">
+        Save For Later
+      </button>
       <button color="primary" mat-raised-button (click)="addToCart()">
         <mat-icon>add_shopping_cart</mat-icon>
         &nbsp;&nbsp; Add to cart

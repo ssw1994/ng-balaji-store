@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -12,14 +12,18 @@ export class HeaderComponent {
     return userId ? true : false;
   }
 
-  constructor(private router: Router) {}
+  constructor(private navigationService: NavigationService) {}
+
+  home() {
+    this.navigationService.setPage('home', '/');
+  }
 
   async handleAction() {
     try {
       if (this.isLoggedIn) {
         localStorage.removeItem('userId');
       } else {
-        await this.router.navigate(['/', 'auth']);
+        await this.navigationService.setPage('Authenticate', ['/', 'auth']);
       }
     } catch (error) {
       console.error(error);

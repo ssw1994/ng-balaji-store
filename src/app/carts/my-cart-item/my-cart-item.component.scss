@@ -1,0 +1,29 @@
+.cart_item {
+  display: flex;
+
+  & div {
+    line-height: 1.5;
+  }
+
+  .item_price,
+  .item_title {
+    font-size: 20px;
+  }
+
+  & > div:first-of-type {
+    width: 35%;
+  }
+
+  & > div:last-of-type {
+    width: 65%;
+  }
+
+  & > div {
+    padding: 10px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+}

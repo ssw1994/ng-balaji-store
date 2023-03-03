@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { AddressSchema } from "./address.schema";
 const { model, schema } = require("mongoose");
 
 const OrderSchema = new schema({
@@ -14,8 +15,14 @@ const OrderSchema = new schema({
     },
   ],
   total_price: { type: Number, required: true },
+  order_status: {
+    type: String,
+    enum: ["in_progress", "shipping", "delivered"],
+  },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
+  shipping_address: { type: mongoose.SchemaType.ObjectId, ref: AddressSchema },
+  billing_address: { type: mongoose.SchemaType.ObjectId, ref: AddressSchema },
 });
 
 const OrderModal = model("orders", OrderSchema);

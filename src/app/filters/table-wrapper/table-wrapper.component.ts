@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationService } from 'src/app/common';
 import { ProductsService } from '../services/products.service';
 
 @Component({
@@ -8,6 +9,11 @@ import { ProductsService } from '../services/products.service';
 })
 export class TableWrapperComponent implements OnInit {
   tableData: Array<any>;
-  constructor(public productService: ProductsService) {}
-  ngOnInit(): void {}
+  constructor(
+    public productService: ProductsService,
+    private navigationService: NavigationService
+  ) {}
+  ngOnInit(): void {
+    this.navigationService.setPageTitle('home');
+  }
 }

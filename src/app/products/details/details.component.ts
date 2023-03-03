@@ -33,7 +33,6 @@ export class DetailsComponent {
           id: this.cartId,
           item: {
             product_id: this.productDetails._id,
-            quantity: this.qantity.value,
             price: this.productDetails.price,
           },
         })
@@ -45,9 +44,10 @@ export class DetailsComponent {
     }
   }
 
+  saveForLater() {}
+
   getQuantity(quantity: any) {
     try {
-      console.log(quantity);
       this.qantity.patchValue(quantity);
     } catch (error) {
       console.error(error);

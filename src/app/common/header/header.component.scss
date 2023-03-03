@@ -7,11 +7,22 @@
   height: 50px;
 }
 
-.top-user-control {
-  width: fit-content;
-  float: right;
+.app-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 15px;
+  justify-content: space-between;
+  padding: 0 25px;
+
+  .store-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .top-user-control {
+    width: fit-content;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+  }
 }

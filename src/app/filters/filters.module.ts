@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from '../common/shared.module';
 import { ListService } from './services/list.service';
 import { BaseUrlInterceptor } from '../common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -33,7 +34,13 @@ const routes: Routes = [
     FilterOptionsComponent,
     FiltersComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     ListService,
     {

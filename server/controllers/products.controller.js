@@ -1,5 +1,7 @@
 const { CartModel } = require("../schemas/cart.schema");
 const { ProductModel } = require("../schemas/products");
+const { default: mongoose } = require("mongoose");
+
 const fetchProducts = async (req, res, next) => {
   try {
     const data = await ProductModel.find();
@@ -12,13 +14,19 @@ const fetchProducts = async (req, res, next) => {
 const addtoCart = async (req, res, next) => {
   try {
     const { id, item } = req.body;
-    console.log(id, item);
-    const data = await CartModel.findOneAndUpdate(
-      { _id: id },
-      { $push: { items: item } }
-    ).exec();
+    const data = await CartModel.findByIdAndUpdate(
+      mongoose.Types.ObjectId(id),
+      {
+        $push: { items: item },
+        $inc: {
+          total_price: item.price,
+        },
+      },
+      { new: true }
+    );
     res.send({ data }).json().status(200);
   } catch (error) {
+    console.log(error);
     next({ error });
   }
 };

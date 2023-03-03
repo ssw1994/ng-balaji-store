@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-icon {
+  margin: 0px !important;
+}
+
+input,
+select {
+  height: 30px;
+  width: 100%;
+}
+button {
+  height: 30px;
+}
+select {
+  height: 36px !important;
+}
