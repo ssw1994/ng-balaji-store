@@ -1,0 +1,9 @@
+<div class="payment-options">
+  <app-step-container
+    [title]="'Order Summary'"
+    [primaryButton]="totalPay"
+    (actionClick)="startPayment()"
+  >
+    <app-order-summary></app-order-summary>
+  </app-step-container>
+</div>

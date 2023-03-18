@@ -1,0 +1,18 @@
+:host {
+  position: fixed;
+  top: 70px;
+
+  width: 95%;
+  padding: 10px 25px;
+
+  .checkout-page {
+    display: flex;
+    gap: 5px;
+    .cart-summary {
+      width: 30%;
+    }
+    .checkout-steps {
+      width: 70%;
+    }
+  }
+}

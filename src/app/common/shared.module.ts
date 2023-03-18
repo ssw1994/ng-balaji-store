@@ -15,7 +15,12 @@ import { MyCartComponent } from '../carts';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 import { AddressComponent } from './address/address.component';
+import { MyCartSummaryComponent } from './my-cart-summary/my-cart-summary.component';
+import { StepContainerComponent } from './step-container/step-container.component';
+import { ExpansionPanelComponent } from './expansion-panel/expansion-panel.component';
+import { UserAddressComponent } from './user-address/user-address.component';
 const shared = [
   MatIconModule,
   MatCardModule,
@@ -25,6 +30,7 @@ const shared = [
   MatBadgeModule,
   MatChipsModule,
   MatDividerModule,
+  MatListModule,
 ];
 
 @NgModule({
@@ -36,6 +42,10 @@ const shared = [
     ItemQuantityComponent,
     StarRatingComponent,
     AddressComponent,
+    MyCartSummaryComponent,
+    StepContainerComponent,
+    ExpansionPanelComponent,
+    UserAddressComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +62,12 @@ const shared = [
     ImgGalleryComponent,
     ItemQuantityComponent,
     StarRatingComponent,
+    MyCartSummaryComponent,
+    AddressComponent,
+    StepContainerComponent,
     ...shared,
+    ExpansionPanelComponent,
+    UserAddressComponent,
   ],
 })
 export class SharedModule {}

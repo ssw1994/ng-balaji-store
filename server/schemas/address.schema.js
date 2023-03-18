@@ -1,6 +1,6 @@
-const { model, schema } = require("mongoose");
+const { model, Schema } = require("mongoose");
 
-const AddressSchema = new schema({
+const AddressSchema = new Schema({
   name: { type: String, required: [true, "Address name is required"] },
   address_line1: {
     type: String,
@@ -14,6 +14,8 @@ const AddressSchema = new schema({
   state: { type: String, required: [true, "State is required"] },
   zip_code: { type: String, required: [true, "Zip code is required"] },
   country: { type: String, required: [true, "Country is required"] },
+  latitude: { type: Number, required: [true, "Latitude is required"] },
+  longitude: { type: Number, required: [true, "Longitude is required"] },
 });
 
 const AddressModel = model("address", AddressSchema);

@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './bjs-loader.component.html',
-  styleUrls: ['./bjs-loader.component.scss']
+  styleUrls: ['./bjs-loader.component.scss'],
 })
-export class BjsLoaderComponent {
-
-}
+export class BjsLoaderComponent {}

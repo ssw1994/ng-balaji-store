@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-img-gallery',
@@ -6,6 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./img-gallery.component.scss'],
 })
 export class ImgGalleryComponent implements OnInit {
+  @HostListener('click', ['$event'])
+  imageAreaClick(event: any) {
+    event && event.stopPropagation();
+  }
+
   @Input()
   images: Array<string>;
 
@@ -40,8 +45,9 @@ export class ImgGalleryComponent implements OnInit {
     }
   }
 
-  setImage(index: number) {
+  setImage(event: any, index: number) {
     try {
+      event && event.stopPropagation();
       this.currentIndex = index;
     } catch (error) {
       console.error(error);

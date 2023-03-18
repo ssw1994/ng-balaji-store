@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
+import { NavigationService } from '../../common';
 import { CartItem } from '../models/cart.model';
 import { CartsService } from '../services/carts.service';
 @Component({
@@ -7,20 +8,42 @@ import { CartsService } from '../services/carts.service';
   styleUrls: ['./my-cart-item.component.scss'],
 })
 export class MyCartItemComponent {
+  @HostListener('click')
+  itemClick() {
+    this.navigationService.setPage(this.cartItem.title, [
+      '/',
+      'products',
+      'details',
+      this.cartItem._id,
+    ]);
+  }
+
   @Input()
   cartItem: CartItem;
 
   @Input()
   cartId: string;
 
-  constructor(private cartService: CartsService) {}
+  constructor(
+    private cartService: CartsService,
+    private navigationService: NavigationService
+  ) {}
 
   getQuantity(quantity: any) {
-    console.log(quantity);
+    this.cartService
+      .updateQuantity({
+        cartId: this.cartItem.cartId,
+        productId: this.cartItem._id,
+        quantity,
+      })
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
-  removeFromCart() {
+  removeFromCart(event: any) {
     try {
+      event && event.stopPropagation();
       this.cartService
         .removeFromCart(this.cartItem._id, this.cartId)
         .subscribe((response) => {

@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 5px 5px 20px #eee;
+
+  .step-container {
+    width: 100%;
+    & > div {
+      padding: 15px;
+    }
+
+    .step-header {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .step-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    & > div:not(:last-child) {
+      border-bottom: 1px solid gray;
+    }
+  }
+}

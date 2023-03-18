@@ -20,9 +20,29 @@ export class CartsService {
     );
   }
 
+  getCartSummary(id: string | null) {
+    return this.http
+      .get(environment.apiUrl + `carts/summary?id=${id}`, {
+        observe: 'response',
+      })
+      .pipe(map((t) => t.body));
+  }
+
   getCartItems(id: string) {
     return this.http
       .get(environment.apiUrl + `carts/items?id=${id}`, {
+        observe: 'response',
+      })
+      .pipe(map((t) => t.body));
+  }
+
+  updateQuantity(payload: {
+    cartId: string;
+    productId: string;
+    quantity: number;
+  }) {
+    return this.http
+      .post(environment.apiUrl + 'carts/update/quantity', payload, {
         observe: 'response',
       })
       .pipe(map((t) => t.body));

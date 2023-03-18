@@ -6,6 +6,10 @@
     ></app-img-gallery>
   </div>
   <div class="card-header">{{ product.title }}</div>
-  <div class="card-body"><div [innerHTML]="product.description"></div></div>
-  <div class="card-footer"></div>
+  <div class="card-body">
+    <div>
+      <h1>{{ product.price }}</h1>
+    </div>
+    <div [innerHTML]="product.description"></div>
+  </div>
 </div>

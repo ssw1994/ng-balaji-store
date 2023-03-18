@@ -1,0 +1,13 @@
+:host {
+  width: 100%;
+  .payment-options {
+    width: 100%;
+  }
+
+  ::ng-deep {
+    app-step-container {
+      display: block;
+      padding: 15px;
+    }
+  }
+}

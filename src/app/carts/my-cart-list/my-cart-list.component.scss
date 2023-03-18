@@ -1,6 +1,6 @@
 .cart_list {
   display: flex;
-
+  gap: 5;
   & > div:first-of-type {
     width: 75%;
   }

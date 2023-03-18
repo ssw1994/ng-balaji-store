@@ -10,7 +10,7 @@
             'background-image': 'url(' + image + ')',
             height: previewHeight
           }"
-          (click)="setImage(i)"
+          (click)="setImage($event, i)"
         ></div>
       </div>
       <div
@@ -28,7 +28,7 @@
         class="dot"
         *ngFor="let image of images; let i = index"
         [ngClass]="{ 'active-image': currentIndex === i }"
-        (click)="setImage(i)"
+        (click)="setImage($event, i)"
       ></button>
     </div>
   </div>

@@ -24,8 +24,9 @@ export class LoginComponent {
     this.buildLoginForm();
   }
 
-  authenticate() {
+  authenticate(event: any) {
     try {
+      event && event.stopPropagation();
       const loginValues = this.loginForm.getRawValue();
       console.log(loginValues);
       this.authService

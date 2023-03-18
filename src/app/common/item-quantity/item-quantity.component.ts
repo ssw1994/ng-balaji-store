@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -17,6 +18,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./item-quantity.component.scss'],
 })
 export class ItemQuantityComponent implements OnChanges, OnInit, OnDestroy {
+  @HostListener('click', ['$event'])
+  itemClick(event: any) {
+    event && event.stopPropagation();
+  }
+
   @Input()
   max: number;
 
@@ -25,6 +31,9 @@ export class ItemQuantityComponent implements OnChanges, OnInit, OnDestroy {
 
   @Output()
   getQuantity: EventEmitter<number | null> = new EventEmitter<number | null>();
+
+  @Input()
+  value: number;
 
   quantity: FormControl<number | null> = new FormControl<number>(1);
 
@@ -37,6 +46,8 @@ export class ItemQuantityComponent implements OnChanges, OnInit, OnDestroy {
   get isMinValue(): boolean {
     return this.quantity.value === this.min;
   }
+
+  constructor() {}
 
   increment() {
     try {
@@ -67,6 +78,10 @@ export class ItemQuantityComponent implements OnChanges, OnInit, OnDestroy {
         this.quantity.addValidators([
           Validators.min(changes['min'].currentValue),
         ]);
+      }
+
+      if (changes['value'].currentValue) {
+        this.quantity.patchValue(this.value);
       }
     } catch (error) {
       console.error(error);

@@ -9,6 +9,7 @@ const CartItemSchema = new Schema({
   },
   quantity: { type: Number, default: 1 },
   price: { type: Number, required: true },
+  discountPercentage: { type: Number, default: null },
 });
 
 const CartSchema = new Schema({

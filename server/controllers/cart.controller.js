@@ -67,7 +67,6 @@ const removeCartItem = async (req, res, next) => {
   try {
     const id = req.query["id"];
     const { product_id } = req.body;
-    console.log(id, product_id);
     const cartItem = await CartModel.aggregate([
       { $match: { _id: mongoose.Types.ObjectId(id) } },
       { $unwind: "$items" },
@@ -75,15 +74,23 @@ const removeCartItem = async (req, res, next) => {
       { $project: { items: 1 } },
     ]);
 
-    console.log(cartItem);
-
+    const removedItem = cartItem[0].items;
+    let priceToBeDeducted = 0;
+    if (removedItem) {
+      priceToBeDeducted =
+        parseInt(removedItem.price) * parseInt(removedItem.quantity);
+    }
     const data = await CartModel.findByIdAndUpdate(
       mongoose.Types.ObjectId(id),
       {
+        $inc: {
+          total_price: -priceToBeDeducted,
+        },
         $pull: {
           items: { product_id: mongoose.Types.ObjectId(product_id) },
         },
-      }
+      },
+      { new: true }
     );
     res
       .send({
@@ -97,10 +104,90 @@ const removeCartItem = async (req, res, next) => {
   }
 };
 
+const updateCartQuantity = async (req, res, next) => {
+  try {
+    const { cartId, productId, quantity } = req.body;
+    //console.log("cartId", cartId);
+    //console.log("productId", productId);
+    //console.log("quantity", quantity);
+
+    const updateItems = await CartModel.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(cartId),
+        },
+      },
+      {
+        $project: { items: 1 },
+      },
+      {
+        $unwind: "$items",
+      },
+      {
+        $match: {
+          "items.product_id": mongoose.Types.ObjectId(productId),
+        },
+      },
+    ]);
+
+    const cartItem = { ...updateItems[0].items };
+    console.log(cartItem);
+    let priceToBeAddedOrNegate =
+      (quantity - cartItem.quantity) * cartItem.price;
+    const data = await CartModel.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(cartId),
+        "items.product_id": productId,
+      },
+      {
+        $set: {
+          "items.$.quantity": quantity,
+        },
+        $inc: {
+          total_price: priceToBeAddedOrNegate,
+        },
+      }
+    );
+    res.send(data).json().status(201);
+  } catch (error) {
+    console.log(error);
+    next({ error });
+  }
+};
+
 const getUserCartSummary = async (req, res, next) => {
   try {
-    const summaryData = await CartModel.aggregate([{}]);
+    const cartId = req.query["id"];
+    const summaryData = await CartModel.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(cartId) } },
+      {
+        $project: {
+          total_price: 1,
+          count: { $size: "$items" },
+        },
+      },
+      {
+        $addFields: {
+          delivery_charges: {
+            $cond: [{ $gte: ["$total_price", 500] }, 0, 150],
+          },
+        },
+      },
+      {
+        $addFields: {
+          cart_total: { $add: ["$delivery_charges", "$total_price"] },
+        },
+      },
+      {
+        $limit: 1,
+      },
+    ]);
+    res
+      .send(...summaryData)
+      .json()
+      .status(200);
   } catch (error) {
+    console.log(error);
     next({ error });
   }
 };
@@ -110,4 +197,5 @@ module.exports = {
   getCartItems,
   removeCartItem,
   getUserCartSummary,
+  updateCartQuantity,
 };

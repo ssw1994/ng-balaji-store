@@ -1,0 +1,11 @@
+<div class="expansion-panel">
+  <div class="expansion-header">
+    <div class="expansion-title">{{ title }}</div>
+    <div class="toggle-icon" [ngClass]="{ expanded: isExpanded }">
+      <button (click)="toggleExpansion()">^</button>
+    </div>
+  </div>
+  <div class="expansion-body" *ngIf="isExpanded">
+    <ng-content></ng-content>
+  </div>
+</div>

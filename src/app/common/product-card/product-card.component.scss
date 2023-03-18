@@ -1,16 +1,21 @@
 :host {
   width: 100%;
   height: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .card {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
+  text-align: ellipsis;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
   .card-media {
-    height: 70%;
+    height: 55%;
     .app-img-gallery {
       height: 100%;
       width: 100%;

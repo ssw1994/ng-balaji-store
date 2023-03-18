@@ -1,10 +1,10 @@
 :host {
   position: sticky;
-  top: 100px;
+  top: 50px;
   .summary-details {
-    & > div {
+    & .summary-line {
       display: flex;
-      line-height: 2;
+      line-height: 3;
       & > label:first-of-type {
         width: 60%;
       }
@@ -12,6 +12,13 @@
       & > label:last-of-type {
         width: 40%;
         text-align: right;
+      }
+    }
+
+    .checkout-flow-entry-container {
+      padding: 15px 0;
+      button {
+        width: 100%;
       }
     }
   }

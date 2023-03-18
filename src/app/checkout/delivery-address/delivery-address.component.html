@@ -1,0 +1,15 @@
+<div>
+  <app-step-container
+    [title]="'Delivery Address'"
+    [primaryButton]="'Next'"
+    (actionClick)="nextStep()"
+  >
+    <app-expansion-panel [title]="'New Address'" [expanded]="true">
+      <app-address></app-address>
+    </app-expansion-panel>
+
+    <app-expansion-panel [title]="'Existing Address'">
+      <app-user-address></app-user-address>
+    </app-expansion-panel>
+  </app-step-container>
+</div>

@@ -1,0 +1,32 @@
+<div class="order-summary">
+  <table>
+    <thead>
+      <tr>
+        <!-- <th></th> -->
+        <th>Product</th>
+        <th class="number-text">Quantity</th>
+        <th class="number-text">Discount%</th>
+        <th class="number-text">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of myItems">
+        <!-- <td>
+          <div class="imgs">
+            <app-img-gallery [images]="item.images"></app-img-gallery>
+          </div>
+        </td> -->
+        <td>
+          {{ item.title }}
+        </td>
+        <td class="number-text">
+          {{ item.quantity }}
+        </td>
+        <td class="number-text">{{ item.discountPercentage }}</td>
+        <td class="number-text">
+          {{ item.price }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

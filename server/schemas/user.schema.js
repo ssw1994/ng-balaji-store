@@ -1,4 +1,5 @@
 const { model, Schema, default: mongoose } = require("mongoose");
+const { AddressSchema } = require("./address.schema");
 
 const UserSchema = new Schema({
   username: {
@@ -23,6 +24,7 @@ const UserSchema = new Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "carts",
   },
+  addresses: [AddressSchema],
 });
 
 const UserModel = model("users", UserSchema);

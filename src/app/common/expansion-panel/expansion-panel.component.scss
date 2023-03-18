@@ -1,0 +1,20 @@
+:host {
+  .expansion-panel {
+    border: 1px solid gray;
+    margin: 5px 0;
+    .expansion-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 10px;
+      background-color: lightgray;
+
+      .toggle-icon.expanded {
+        transform: rotate(-180deg);
+      }
+    }
+
+    .expansion-body {
+      padding: 15px;
+    }
+  }
+}

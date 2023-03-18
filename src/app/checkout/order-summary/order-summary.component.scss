@@ -1,0 +1,27 @@
+:host {
+  width: 100%;
+
+  & table {
+    width: 100%;
+
+    tr {
+      th,
+      td {
+        text-align: left;
+        padding: 5px 10px;
+      }
+      td.number-text {
+        text-align: right;
+      }
+      th.number-text {
+        text-align: right;
+      }
+    }
+  }
+
+  .order-summary {
+    .imgs {
+      height: 120px;
+    }
+  }
+}

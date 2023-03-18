@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cart Summary</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="summary-details">
+      <mat-list-item>
+        <div class="summary-line">
+          <label> Price({{ summary.count }}) </label>
+          <label>{{ summary.total_price }}</label>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <!-- <div>
+        <label> Discount </label>
+        <label>{{ discount }}</label>
+      </div> -->
+      <mat-list-item>
+        <div class="summary-line">
+          <label> Delivery Charges </label>
+          <label>{{ summary.delivery_charges }}</label>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        <div class="summary-line">
+          <label> <b>Total Amount</b> </label>
+          <label
+            ><b class="success">{{ summary.cart_total }}</b></label
+          >
+        </div>
+      </mat-list-item>
+      <ng-container *ngIf="showCheckoutButton">
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="checkout-flow-entry-container">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="startCheckingOut()"
+            >
+              Checkout
+            </button>
+          </div>
+        </mat-list-item>
+      </ng-container>
+    </div>
+  </mat-card-content>
+</mat-card>

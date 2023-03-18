@@ -34,6 +34,7 @@ export class DetailsComponent {
           item: {
             product_id: this.productDetails._id,
             price: this.productDetails.price,
+            discountPercentage: this.productDetails.discountPercentage,
           },
         })
         .subscribe((response) => {

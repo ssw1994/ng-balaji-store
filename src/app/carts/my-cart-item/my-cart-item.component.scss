@@ -1,3 +1,8 @@
+:host {
+  &:hover {
+    cursor: pointer;
+  }
+}
 .cart_item {
   display: flex;
 

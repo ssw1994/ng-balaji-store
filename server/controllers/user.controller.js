@@ -82,7 +82,6 @@ const checkUserVerification = async (req, res, next) => {
 const register = async (req, res, next) => {
   try {
     const user = new UserModel(req.body);
-
     const userObj = await user.save();
     const cart = new CartModel({
       customer_id: userObj._id,
@@ -93,6 +92,7 @@ const register = async (req, res, next) => {
 
     const updatedUserObj = await UserModel.findByIdAndUpdate(userObj._id, {
       cart_id: cartObj._id,
+      $push: { addresses: req.body.address },
     });
     const { email, _id } = updatedUserObj;
     try {
@@ -141,9 +141,21 @@ const authenticate = async (req, res, next) => {
   }
 };
 
+const fetchAddress = async (req, res, next) => {
+  try {
+    const id = req.query["id"];
+    console.log("User id ---->", id);
+    const data = await UserModel.findById(mongoose.Types.ObjectId(id));
+    res.send(data.addresses).status(200).json();
+  } catch (error) {
+    next({ error });
+  }
+};
+
 module.exports = {
   register,
   authenticate,
   verifyEmail,
   checkUserVerification,
+  fetchAddress,
 };

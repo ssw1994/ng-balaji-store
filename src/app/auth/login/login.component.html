@@ -1,5 +1,9 @@
 <div>
-  <div class="login-form" [formGroup]="loginForm">
+  <form
+    class="login-form"
+    [formGroup]="loginForm"
+    (submit)="authenticate($event)"
+  >
     <div>
       <input
         type="username"
@@ -17,10 +21,10 @@
       />
     </div>
     <div>
-      <button (click)="authenticate()">Login</button>
+      <button type="submit">Login</button>
     </div>
     <div>
       <a routerLink="/auth/register">Register</a>
     </div>
-  </div>
+  </form>
 </div>

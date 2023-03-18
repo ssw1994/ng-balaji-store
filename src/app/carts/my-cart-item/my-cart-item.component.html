@@ -23,11 +23,16 @@
         <app-item-quantity
           [max]="cartItem.stock"
           [min]="1"
+          [value]="cartItem.quantity"
           (getQuantity)="getQuantity($event)"
         ></app-item-quantity>
       </div>
       <div>
-        <button mat-raised-button color="primary" (click)="removeFromCart()">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="removeFromCart($event)"
+        >
           REMOVE
           <mat-icon>delete_forever</mat-icon>
         </button>

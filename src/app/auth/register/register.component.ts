@@ -7,6 +7,8 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GeneralService } from '../../common';
+import { Address } from '../models/auth.model';
 import { AuthService } from '../services/auth.service';
 
 interface RegisterForm {
@@ -28,7 +30,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private generalService: GeneralService
   ) {
     this.buildRegisterForm();
   }
@@ -39,7 +42,6 @@ export class RegisterComponent {
 
   private matchPassword(): ValidatorFn {
     return (control: AbstractControl) => {
-      console.log(control.value);
       if (control.value === this.password) {
         return null;
       }
@@ -64,7 +66,7 @@ export class RegisterComponent {
       const registerValues = this.registerForm.getRawValue();
       console.log(registerValues);
       this.authService
-        .register(registerValues)
+        .register({ ...registerValues, address: this._userLocation })
         .subscribe(async (response: any) => {
           console.log(response);
           if (localStorage) {
@@ -75,8 +77,13 @@ export class RegisterComponent {
     } catch (error) {}
   }
 
+  private _userLocation: Address | null;
+
   ngOnInit(): void {
     try {
+      this.generalService.getFullAddress().subscribe((location) => {
+        this._userLocation = location;
+      });
     } catch (error) {}
   }
 }

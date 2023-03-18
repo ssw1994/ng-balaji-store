@@ -1,0 +1,13 @@
+<div class="step-container">
+  <div class="step-header">
+    {{ title }}
+  </div>
+  <div class="step-contents">
+    <ng-content></ng-content>
+  </div>
+  <div class="step-footer">
+    <button mat-raised-button (click)="actionClick.emit()" color="primary">
+      {{ primaryButton }}
+    </button>
+  </div>
+</div>

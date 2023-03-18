@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyCartItemComponent } from './my-cart-item/my-cart-item.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MyCartWrapperComponent } from './my-cart-wrapper/my-cart-wrapper.component';
-import { MyCartSummaryComponent } from './my-cart-summary/my-cart-summary.component';
 
 const routes: Routes = [
   {
@@ -31,7 +30,6 @@ const routes: Routes = [
     MyCartListComponent,
     MyCartItemComponent,
     MyCartWrapperComponent,
-    MyCartSummaryComponent,
   ],
   imports: [
     CommonModule,
