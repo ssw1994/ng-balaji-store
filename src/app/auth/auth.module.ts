@@ -4,6 +4,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../common';
 import { RouterModule, Routes } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { authFeature } from './store/reducers/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/auth.effects';
+import { AuthFacade } from './store/facades/auth.facade';
+import { AuthBtnComponent } from './auth-btn/auth-btn.component';
 
 const routes: Routes = [
   {
@@ -27,7 +33,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  declarations: [LoginComponent, RegisterComponent, AuthBtnComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(authFeature),
+    EffectsModule.forFeature([AuthEffects]),
+  ],
+  exports: [AuthBtnComponent],
 })
 export class AuthModule {}

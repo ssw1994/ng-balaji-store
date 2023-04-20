@@ -7,5 +7,24 @@
 }
 
 .app-body {
-  margin-top: 100px;
+  margin-top: 50px;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  z-index: 1;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+
+  app-header {
+    width: 95%;
+  }
+  app-auth-btn {
+    margin-right: 15px;
+  }
 }

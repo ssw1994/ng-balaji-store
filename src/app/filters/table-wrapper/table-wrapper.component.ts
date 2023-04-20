@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationService } from 'src/app/common';
 import { ProductsService } from '../services/products.service';
+import { FilterFacade } from '../store/facades/filters.facades';
 
 @Component({
   selector: 'app-table-wrapper',
@@ -8,12 +9,13 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./table-wrapper.component.scss'],
 })
 export class TableWrapperComponent implements OnInit {
-  tableData: Array<any>;
+  products$ = this.filterFacade.products.data$;
   constructor(
-    public productService: ProductsService,
+    private filterFacade: FilterFacade,
     private navigationService: NavigationService
   ) {}
   ngOnInit(): void {
     this.navigationService.setPageTitle('home');
+    this.filterFacade.fetchProducts();
   }
 }

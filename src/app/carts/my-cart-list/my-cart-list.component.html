@@ -11,7 +11,7 @@
   </div>
 </ng-template>
 <div class="cart_list">
-  <div class="cart_item_list">
+  <div class="cart_item_list" *ngIf="myItems$ | async as myItems">
     <ng-container *ngIf="myItems && myItems.length > 0; else empty_cart">
       <app-my-cart-item
         *ngFor="let item of myItems"

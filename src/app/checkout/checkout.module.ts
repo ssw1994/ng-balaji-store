@@ -7,11 +7,13 @@ import { SharedModule } from '../common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import { PaymentOptionsComponent } from './payment-options/payment-options.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { CancheckoutGuard } from './guards/cancheckout.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: CheckoutStepperComponent,
+    //canActivateChild: [CancheckoutGuard],
     children: [
       {
         path: 'address',

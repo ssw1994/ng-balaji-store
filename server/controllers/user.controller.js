@@ -123,7 +123,7 @@ const authenticate = async (req, res, next) => {
     if (user) {
       res
         .send({
-          id: user._id,
+          userId: user._id,
           cartId: user.cart_id,
         })
         .status(200)
@@ -144,9 +144,51 @@ const authenticate = async (req, res, next) => {
 const fetchAddress = async (req, res, next) => {
   try {
     const id = req.query["id"];
-    console.log("User id ---->", id);
     const data = await UserModel.findById(mongoose.Types.ObjectId(id));
     res.send(data.addresses).status(200).json();
+  } catch (error) {
+    next({ error });
+  }
+};
+
+const saveAddress = async (req, res, next) => {
+  try {
+    const id = req.query["id"];
+    const address = req.body;
+    const data = await UserModel.findByIdAndUpdate(
+      mongoose.Types.ObjectId(id),
+      {
+        $push: { addresses: address },
+      }
+    );
+    res
+      .send({
+        data,
+      })
+      .status(200)
+      .json();
+  } catch (error) {
+    next({ error });
+  }
+};
+
+const deleteAddress = async (req, res, next) => {
+  try {
+    const { user_id, address_id } = req.body;
+    const data = await UserModel.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(user_id),
+      },
+      {
+        $pull: { addresses: { _id: mongoose.Types.ObjectId(address_id) } },
+      }
+    );
+    res
+      .send({
+        message: "Address deleted successfully",
+      })
+      .status(200)
+      .json();
   } catch (error) {
     next({ error });
   }
@@ -158,4 +200,6 @@ module.exports = {
   verifyEmail,
   checkUserVerification,
   fetchAddress,
+  saveAddress,
+  deleteAddress,
 };

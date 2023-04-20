@@ -1,0 +1,19 @@
+<div class="order-item" *ngFor="let order of orders" (click)="onClick(order)">
+  <div class="imgs">
+    <app-img-gallery [images]="order.images"></app-img-gallery>
+  </div>
+  <div class="details">
+    <div>
+      <strong>{{ order.title }}</strong>
+    </div>
+    <div>{{ order.description }}</div>
+    <div class="statistics">
+      <div>
+        <label>quantity</label><strong>{{ order.quantity }}</strong>
+      </div>
+      <div>
+        <label>price</label><strong>{{ order.price }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

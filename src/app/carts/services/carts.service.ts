@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { response } from 'express';
 import { filter, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { AbstractOrder } from '../../common';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class CartsService {
       .pipe(map((t) => t.body));
   }
 
-  getCartItems(id: string) {
+  getCartItems(id: string | null) {
     return this.http
       .get(environment.apiUrl + `carts/items?id=${id}`, {
         observe: 'response',
@@ -60,5 +60,11 @@ export class CartsService {
         }
       )
       .pipe(map((t) => t.body));
+  }
+
+  placeOrder(order: AbstractOrder) {
+    return this.http.post(`${environment.apiUrl}carts/order`, order, {
+      observe: 'body',
+    });
   }
 }

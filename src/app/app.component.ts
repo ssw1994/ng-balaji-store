@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from './store/app.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,5 +12,7 @@ export class AppComponent {
     return false;
   }
 
-  constructor() {}
+  constructor(private appService: AppService) {
+    console.log(this.appService.userId);
+  }
 }

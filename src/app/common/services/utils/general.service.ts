@@ -4,12 +4,16 @@ import { map, mergeMap } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Address } from '../../../auth/models/auth.model';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 declare var google: any;
 @Injectable({
   providedIn: 'root',
 })
 export class GeneralService {
   constructor(private http: HttpClient) {}
+
+  shipping_address$: BehaviorSubject<Address | null> =
+    new BehaviorSubject<Address | null>(null);
 
   getCategories(): Observable<HttpResponse<any>> {
     return this.http.get(environment.apiUrl + 'common/categories', {
@@ -119,5 +123,26 @@ export class GeneralService {
     return this.http.get(`${environment.apiUrl}users/address?id=${id}`, {
       observe: 'body',
     });
+  }
+
+  removeUserAddress(payload: {
+    user_id: string;
+    address_id: string;
+  }): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}users/address/delete`,
+      payload,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
+  saveUserAddress(id: string, address: Address): Observable<HttpResponse<any>> {
+    return this.http.post(
+      `${environment.apiUrl}users/address/save?id=${id}`,
+      address,
+      { observe: 'response' }
+    );
   }
 }

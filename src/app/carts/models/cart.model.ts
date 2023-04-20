@@ -13,6 +13,7 @@ export interface CartItem {
   thumbnail: string;
   images: Array<string>;
   quantity: number;
+  product_id?: string;
 }
 
 export interface CartSummary {

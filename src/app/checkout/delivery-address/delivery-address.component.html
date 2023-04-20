@@ -4,12 +4,27 @@
     [primaryButton]="'Next'"
     (actionClick)="nextStep()"
   >
-    <app-expansion-panel [title]="'New Address'" [expanded]="true">
-      <app-address></app-address>
-    </app-expansion-panel>
-
-    <app-expansion-panel [title]="'Existing Address'">
+    <div class="address_choice">
+      <input
+        type="checkbox"
+        [formControl]="newAddress"
+        id="newaddress_choice"
+      />
+      <label for="newaddress_choice">Use new address</label>
+    </div>
+    <app-expansion-panel
+      [title]="'Existing Address'"
+      [expanded]="true"
+      *ngIf="!isNewAddress"
+    >
       <app-user-address></app-user-address>
+    </app-expansion-panel>
+    <app-expansion-panel
+      [title]="'New Address'"
+      [expanded]="true"
+      *ngIf="isNewAddress"
+    >
+      <app-address></app-address>
     </app-expansion-panel>
   </app-step-container>
 </div>

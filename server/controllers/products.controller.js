@@ -4,7 +4,14 @@ const { default: mongoose } = require("mongoose");
 
 const fetchProducts = async (req, res, next) => {
   try {
-    const data = await ProductModel.find();
+    const filters = req.body;
+    const hasFilters = Object.values(filters).some((t) => !!t);
+    let data;
+    if (hasFilters) {
+      data = await ProductModel.find(filters);
+    } else {
+      data = await ProductModel.find();
+    }
     res.send({ data }).json().status(200);
   } catch (error) {
     next({ error });

@@ -1,0 +1,28 @@
+.user-addresses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  .address_card {
+    width: 170px;
+    height: 140px;
+    padding: 15px;
+    border: 1px solid #eee;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    line-height: 1.5;
+    cursor: pointer;
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &:hover {
+      border: 1px solid blue;
+    }
+
+    &.active {
+      border: 1px solid green;
+    }
+  }
+}

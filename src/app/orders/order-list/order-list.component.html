@@ -1,0 +1,31 @@
+<ng-template #order_template let-order="order">
+  <div class="order_stats">
+    <div class="pill info">
+      <div>order id</div>
+      <div>{{ order._id }}</div>
+    </div>
+    <div class="pill success">
+      <div>status</div>
+      <div>
+        {{ order.order_status }}
+      </div>
+    </div>
+    <div class="pill danger">
+      <div>order total</div>
+      <div>{{ order.order_total }}</div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="order-list">
+  <app-expansion-panel [title]="'My orders'" [expanded]="true">
+    <fieldset *ngFor="let order of orders">
+      <legend>Ordered on - {{ order.order_date | date }}</legend>
+      <ng-container
+        [ngTemplateOutlet]="order_template"
+        [ngTemplateOutletContext]="{ order: order }"
+      ></ng-container>
+      <app-my-order [orders]="order.items"></app-my-order>
+    </fieldset>
+  </app-expansion-panel>
+</div>

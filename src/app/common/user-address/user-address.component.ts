@@ -15,7 +15,7 @@ export class UserAddressComponent implements OnInit {
     return userId || '';
   }
 
-  allUserAddresses: Array<Address> = [];
+  allUserAddresses: Array<Address & { selected: boolean }> = [];
   constructor(private generalService: GeneralService) {}
 
   fetchUserAddress() {
@@ -27,6 +27,32 @@ export class UserAddressComponent implements OnInit {
           this.allUserAddresses = response;
         })
     );
+  }
+
+  toFullAddress(address: Address) {
+    return `${address.address_line1},${address.address_line2} ,${address.city}, ${address.state},${address.country} ${address.zip_code}`;
+  }
+
+  removeAddress(address_id: string) {
+    this.generalService
+      .removeUserAddress({ user_id: this.userId, address_id })
+      .subscribe((response: any) => {
+        console.log(response);
+      });
+  }
+
+  useThisAddress(addresss: Address) {
+    this.allUserAddresses = this.allUserAddresses.map((_adds) => {
+      if (_adds._id === addresss._id) {
+        this.generalService.shipping_address$.next(_adds);
+        _adds.selected = true;
+        return _adds;
+      } else if (_adds.selected) {
+        _adds.selected = false;
+        return _adds;
+      }
+      return _adds;
+    });
   }
 
   ngOnInit(): void {

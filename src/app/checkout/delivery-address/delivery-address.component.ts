@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { NavigationService } from '../../common';
+import { FormControl } from '@angular/forms';
+import { AppFacde } from '../../store/app.facade';
+
+export enum Choice {
+  new,
+  old,
+}
 
 @Component({
   selector: 'app-delivery-address',
@@ -7,13 +13,21 @@ import { NavigationService } from '../../common';
   styleUrls: ['./delivery-address.component.scss'],
 })
 export class DeliveryAddressComponent {
-  constructor(private navigationService: NavigationService) {}
+  newAddress = new FormControl(false);
 
+  get isNewAddress(): boolean | null {
+    return this.newAddress.value;
+  }
+
+  constructor(private appFacade: AppFacde) {
+    this.newAddress.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+  }
   nextStep() {
-    this.navigationService.setPage('payment', [
-      '/',
-      'checkout',
-      'payment-options',
-    ]);
+    this.appFacade.navigate({
+      pageName: 'payment',
+      pageURI: ['/', 'checkout', 'payment-options'],
+    });
   }
 }

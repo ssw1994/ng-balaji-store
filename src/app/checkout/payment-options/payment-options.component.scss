@@ -2,6 +2,12 @@
   width: 100%;
   .payment-options {
     width: 100%;
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
   }
 
   ::ng-deep {

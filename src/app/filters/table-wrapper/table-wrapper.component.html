@@ -3,6 +3,6 @@
     <app-filter-options></app-filter-options>
   </div>
   <div>
-    <app-data-table [tableData]="productService.products"></app-data-table>
+    <app-data-table [tableData]="products$ | async"></app-data-table>
   </div>
 </div>

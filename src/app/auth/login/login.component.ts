@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AuthFacade } from '../store/facades/auth.facade';
 
 interface LoginForm {
-  username: FormControl<String | null>;
-  password: FormControl<String | null>;
+  username: FormControl<string | null>;
+  password: FormControl<string | null>;
 }
 
 @Component({
@@ -18,8 +19,7 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private authFacade: AuthFacade
   ) {
     this.buildLoginForm();
   }
@@ -27,20 +27,12 @@ export class LoginComponent {
   authenticate(event: any) {
     try {
       event && event.stopPropagation();
-      const loginValues = this.loginForm.getRawValue();
+      const loginValues: any = this.loginForm.getRawValue();
       console.log(loginValues);
-      this.authService
-        .authenticate(loginValues)
-        .subscribe(async (response: any) => {
-          if (response) {
-            console.log(response);
-            if (localStorage) {
-              localStorage.setItem('userId', response.id);
-              localStorage.setItem('cartId', response.cartId);
-              await this.router.navigate(['/', 'products']);
-            }
-          }
-        });
+      this.authFacade.authenticate({
+        username: loginValues.username,
+        password: loginValues.password,
+      });
     } catch (error) {
       console.error(error);
     }

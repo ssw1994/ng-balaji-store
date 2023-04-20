@@ -10,6 +10,10 @@ import { SharedModule } from '../common/shared.module';
 import { ListService } from './services/list.service';
 import { BaseUrlInterceptor } from '../common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { filterFeature } from './store/reducers/filters.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { FilterEffects } from './store/effects/filters.effects';
 const routes: Routes = [
   {
     path: '',
@@ -40,6 +44,8 @@ const routes: Routes = [
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(filterFeature),
+    EffectsModule.forFeature([FilterEffects]),
   ],
   providers: [
     ListService,

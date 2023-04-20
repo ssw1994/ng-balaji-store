@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthFacade } from '../../auth/store/facades/auth.facade';
+import { AppFacde } from '../../store/app.facade';
 import { NavigationService } from '../services/navigation.service';
 
 @Component({
@@ -12,21 +14,9 @@ export class HeaderComponent {
     return userId ? true : false;
   }
 
-  constructor(private navigationService: NavigationService) {}
+  constructor(private appFacade: AppFacde, private authFacade: AuthFacade) {}
 
   home() {
-    this.navigationService.setPage('home', '/');
-  }
-
-  async handleAction() {
-    try {
-      if (this.isLoggedIn) {
-        localStorage.removeItem('userId');
-      } else {
-        await this.navigationService.setPage('Authenticate', ['/', 'auth']);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    this.appFacade.navigate({ pageName: 'home', pageURI: '/' });
   }
 }

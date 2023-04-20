@@ -1,3 +1,32 @@
-<div>
-  {{ allUserAddresses | json }}
+<ng-template #address_card let-address="address">
+  <div
+    class="address_card"
+    (click)="useThisAddress(address)"
+    [ngClass]="{ active: address.selected }"
+  >
+    <div class="card-header">
+      <div>
+        <h4>{{ address.name }}</h4>
+      </div>
+      <div>
+        <button (click)="removeAddress(address._id)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div>
+      <h5>{{ address.mobile }}</h5>
+    </div>
+    <div>
+      <span>{{ toFullAddress(address) }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<div class="user-addresses">
+  <ng-container
+    *ngFor="let address of allUserAddresses"
+    [ngTemplateOutlet]="address_card"
+    [ngTemplateOutletContext]="{ address: address }"
+  ></ng-container>
 </div>

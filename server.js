@@ -21,6 +21,7 @@ app.use("/api/products", require("./server/routes/product.routes"));
 app.use("/api/users", require("./server/routes/user.routes"));
 app.use("/api/carts", require("./server/routes/cart.routes"));
 app.use("/api/common", require("./server/routes/util.routes"));
+app.use("/api/orders", require("./server/routes/order.routes"));
 http.createServer(app).listen(PORT, () => {
   console.log(msg);
 });

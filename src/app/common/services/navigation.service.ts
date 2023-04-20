@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Page } from '../models/app.models';
 
 @Injectable({
   providedIn: 'root',
@@ -16,20 +17,23 @@ export class NavigationService {
     }
   }
 
-  setPageTitle(pageName: string) {
+  setPageTitle(pageName: string | null) {
+    if (!pageName) return;
     this.titleService.setTitle(pageName);
   }
 
-  private async navigateByURL(pageURL: string) {
+  private async navigateByURL(pageURL: string | null) {
     try {
+      if (!pageURL) return;
       await this.router.navigateByUrl(pageURL);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async setPage(pageName: string, pageURI: string | string[]) {
+  async setPage(page: Page) {
     try {
+      const { pageName, pageURI } = page;
       this.setPageTitle(pageName);
       if (pageURI instanceof Array) {
         this.navigateByPath(pageURI);

@@ -6,17 +6,16 @@ import {
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { GeneralService } from '../../common';
 import { Address } from '../models/auth.model';
-import { AuthService } from '../services/auth.service';
+import { AuthFacade } from '../store/facades/auth.facade';
 
 interface RegisterForm {
-  username: FormControl<String | null>;
-  email: FormControl<String | null>;
-  password: FormControl<String | null>;
-  mobile?: FormControl<String | null>;
-  repassword?: FormControl<String | null>;
+  username: FormControl<string | null>;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
+  mobile?: FormControl<string | null>;
+  repassword?: FormControl<string | null>;
 }
 
 @Component({
@@ -29,8 +28,7 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
+    private authFacade: AuthFacade,
     private generalService: GeneralService
   ) {
     this.buildRegisterForm();
@@ -51,7 +49,7 @@ export class RegisterComponent {
 
   buildRegisterForm() {
     try {
-      this.registerForm = this.fb.group<RegisterForm>({
+      this.registerForm = this.fb.nonNullable.group<RegisterForm>({
         username: new FormControl(''),
         password: new FormControl(''),
         mobile: new FormControl(''),
@@ -63,17 +61,8 @@ export class RegisterComponent {
 
   register() {
     try {
-      const registerValues = this.registerForm.getRawValue();
-      console.log(registerValues);
-      this.authService
-        .register({ ...registerValues, address: this._userLocation })
-        .subscribe(async (response: any) => {
-          console.log(response);
-          if (localStorage) {
-            localStorage.setItem('userId', response.id);
-          }
-          await this.router.navigate(['/', 'products']);
-        });
+      const registerValues: any = this.registerForm.getRawValue();
+      this.authFacade.register(registerValues);
     } catch (error) {}
   }
 

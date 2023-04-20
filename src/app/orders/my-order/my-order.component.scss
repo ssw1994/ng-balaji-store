@@ -1,0 +1,37 @@
+.order-item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border: 1px solid lightgray;
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 20%);
+  padding: 15px;
+  min-height: 110px;
+  margin: 5px 0;
+  &:hover {
+    cursor: pointer;
+  }
+  .imgs {
+    min-width: 130px;
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+  strong {
+    color: lightblue;
+  }
+  .statistics {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    label {
+      margin-right: 10px;
+      & ::after {
+        content: " : ";
+      }
+    }
+  }
+}

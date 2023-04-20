@@ -1,0 +1,23 @@
+.order-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 25px;
+  fieldset {
+    margin: 10px 0;
+    legend {
+      border: 1px solid lightgray;
+      background: lightyellow;
+      color: red;
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .order_stats {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}

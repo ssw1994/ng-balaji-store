@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const { CartModel } = require("../schemas/cart.schema");
-
+const { OrderModel } = require("../schemas/order.schema");
+const { UserModel } = require("../schemas/user.schema");
 const getCartQuantity = async (req, res, next) => {
   try {
     const id = req.query["id"];
@@ -131,7 +132,6 @@ const updateCartQuantity = async (req, res, next) => {
     ]);
 
     const cartItem = { ...updateItems[0].items };
-    console.log(cartItem);
     let priceToBeAddedOrNegate =
       (quantity - cartItem.quantity) * cartItem.price;
     const data = await CartModel.updateOne(
@@ -192,10 +192,39 @@ const getUserCartSummary = async (req, res, next) => {
   }
 };
 
+const clearUserCart = async (cartId) => {
+  try {
+    await CartModel.updateOne(
+      { _id: mongoose.Types.ObjectId(cartId) },
+      { $set: { items: [], updated_at: new Date(), total_price: 0 } }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+const placeOrder = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const orderDetails = req.body;
+    const order = new OrderModel(orderDetails);
+    const userData = await UserModel.findById(orderDetails?.customer_id);
+    const data = await order.save();
+    if (userData) {
+      clearUserCart(userData.cart_id);
+    }
+    res.send({ data });
+  } catch (error) {
+    console.log(error);
+    next({ error });
+  }
+};
+
 module.exports = {
   getCartQuantity,
   getCartItems,
   removeCartItem,
   getUserCartSummary,
   updateCartQuantity,
+  placeOrder,
 };

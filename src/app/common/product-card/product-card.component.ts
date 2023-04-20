@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavigationService } from '../services/navigation.service';
+import { AppFacde } from '../../store/app.facade';
 
 @Component({
   selector: 'app-product-card',
@@ -13,15 +12,13 @@ export class ProductCardComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    this.navigationService.setPage(this.product.title, [
-      '/',
-      'products',
-      'details',
-      this.product._id,
-    ]);
+    this.appFacade.navigate({
+      pageName: this.product.title,
+      pageURI: ['/', 'products', 'details', this.product._id],
+    });
   }
 
-  constructor(private navigationService: NavigationService) {}
+  constructor(private appFacade: AppFacde) {}
 
   ngOnInit(): void {}
 }

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartSummary } from '../../carts/models/cart.model';
-import { NavigationService } from '..';
 import { CartsService } from '../../carts/services/carts.service';
+import { AppFacde } from 'src/app/store/app.facade';
+import { Observable } from 'rxjs';
+import { CartFacade } from 'src/app/carts/store/cart.facade';
 
 @Component({
   selector: 'app-my-cart-summary',
@@ -13,7 +15,7 @@ import { CartsService } from '../../carts/services/carts.service';
 export class MyCartSummaryComponent implements OnInit {
   private subscriptions = new Subscription();
 
-  summary: CartSummary = {} as CartSummary;
+  summary$: Observable<CartSummary | null>;
 
   get cartId() {
     let _id = localStorage.getItem('cartId');
@@ -21,18 +23,14 @@ export class MyCartSummaryComponent implements OnInit {
   }
 
   startCheckingOut() {
-    this.navigationService.setPage('Checkout', ['/', 'checkout']);
+    this.appFacade.navigate({
+      pageName: 'Checkout',
+      pageURI: ['/', 'checkout'],
+    });
   }
 
   fetchCartSummary() {
-    this.subscriptions.add(
-      this.cartService
-        .getCartSummary(this.cartId)
-        .subscribe((response: any) => {
-          console.log(response);
-          this.summary = response;
-        })
-    );
+    this.cartFacde.fetchCartSummary();
   }
 
   private _currentURL: string;
@@ -42,14 +40,15 @@ export class MyCartSummaryComponent implements OnInit {
   }
 
   constructor(
-    private cartService: CartsService,
-    private navigationService: NavigationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appFacade: AppFacde,
+    private cartFacde: CartFacade
   ) {
     this.route.url.subscribe((currentRoute: Array<UrlSegment>) => {
       const url = currentRoute[0];
       this._currentURL = url?.path;
     });
+    this.summary$ = this.cartFacde.cartSummary.data;
   }
 
   ngOnInit() {

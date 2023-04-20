@@ -1,11 +1,13 @@
 :host {
-  position: fixed;
-  top: 70px;
+  // position: fixed;
+  // top: 70px;
 
-  width: 95%;
   padding: 10px 25px;
+  overflow: auto;
 
   .checkout-page {
+    width: 95%;
+    padding: 15px;
     display: flex;
     gap: 5px;
     .cart-summary {

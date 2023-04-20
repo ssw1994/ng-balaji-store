@@ -13,7 +13,7 @@ body {
   margin: 0px !important;
 }
 
-input,
+input[type="text"],
 select {
   height: 30px;
   width: 100%;
@@ -25,6 +25,48 @@ select {
   height: 36px !important;
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
 .success {
   color: green;
+}
+
+.pill {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: max-content;
+  padding: 5px;
+  border-radius: 10px;
+  color: navy;
+  margin: 5px;
+  & > div:first-of-type {
+    &::after {
+      content: " : ";
+      right: 15px;
+    }
+  }
+  & > div {
+    text-transform: uppercase;
+  }
+  &.info {
+    background-color: lightblue;
+  }
+
+  &.warning {
+    background: lightyellow;
+  }
+
+  &.success {
+    background: lightgreen;
+  }
+
+  &.danger {
+    background-color: lightcoral;
+  }
 }

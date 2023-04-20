@@ -1,7 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { NavigationService } from '../../common';
-import { CartItem } from '../models/cart.model';
-import { CartsService } from '../services/carts.service';
+import { AppFacde } from '../../store/app.facade';
+import { CartItem } from '../../carts/models/cart.model';
+import { CartsService } from '../../carts/services/carts.service';
 @Component({
   selector: 'app-my-cart-item',
   templateUrl: './my-cart-item.component.html',
@@ -10,12 +10,10 @@ import { CartsService } from '../services/carts.service';
 export class MyCartItemComponent {
   @HostListener('click')
   itemClick() {
-    this.navigationService.setPage(this.cartItem.title, [
-      '/',
-      'products',
-      'details',
-      this.cartItem._id,
-    ]);
+    this.appFacade.navigate({
+      pageName: this.cartItem.title,
+      pageURI: ['/', 'products', 'details', this.cartItem._id],
+    });
   }
 
   @Input()
@@ -24,10 +22,7 @@ export class MyCartItemComponent {
   @Input()
   cartId: string;
 
-  constructor(
-    private cartService: CartsService,
-    private navigationService: NavigationService
-  ) {}
+  constructor(private cartService: CartsService, private appFacade: AppFacde) {}
 
   getQuantity(quantity: any) {
     this.cartService

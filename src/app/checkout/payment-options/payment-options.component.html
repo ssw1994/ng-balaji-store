@@ -5,5 +5,50 @@
     (actionClick)="startPayment()"
   >
     <app-order-summary></app-order-summary>
+
+    <app-expansion-panel [title]="'Payment Methods'" [expanded]="true">
+      <div class="payment-methods">
+        <div>
+          <input
+            type="radio"
+            value="netbanking"
+            id="netbanking"
+            name="payment_methods"
+            [formControl]="paymentMethod"
+            [value]="method.netbanking"
+            [attr.disabled]="true"
+          /><label for="netbanking">Netbanking</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="upi"
+            name="payment_methods"
+            [value]="method.upi"
+            [formControl]="paymentMethod"
+            [attr.disabled]="true"
+          /><label for="upi">UPI ( Phonepe/GPay/Amazon Pay/Paytm )</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="cards"
+            name="payment_methods"
+            [value]="method.cards"
+            [formControl]="paymentMethod"
+            [attr.disabled]="true"
+          /><label for="cards">Cards ( Debit/Credit Card )</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="cod"
+            name="payment_methods"
+            [value]="method.cod"
+            [formControl]="paymentMethod"
+          /><label for="cod">COD ( Cash on delivery )</label>
+        </div>
+      </div>
+    </app-expansion-panel>
   </app-step-container>
 </div>

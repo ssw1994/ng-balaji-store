@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="summary$ | async as summary">
   <mat-card-header>
     <mat-card-title>Cart Summary</mat-card-title>
   </mat-card-header>

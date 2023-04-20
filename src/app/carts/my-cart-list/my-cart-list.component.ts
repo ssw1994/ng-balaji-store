@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NavigationService } from 'src/app/common';
+import { AppFacde } from '../../store/app.facade';
 import { CartItem } from '../models/cart.model';
 import { CartsService } from '../services/carts.service';
+import { CartFacade } from '../store/cart.facade';
 
 @Component({
   selector: 'app-my-cart-list',
@@ -14,21 +17,22 @@ export class MyCartListComponent implements OnInit {
     return cartId ? cartId : '';
   }
 
-  myItems: Array<CartItem>;
-
+  myItems$: Observable<Array<CartItem>>;
+  isLoadingCartItems$: Observable<boolean>;
   constructor(
     private cartService: CartsService,
-    private navigationService: NavigationService
-  ) {}
+    private appFacade: AppFacde,
+    private cartFacade: CartFacade
+  ) {
+    this.myItems$ = this.cartFacade.cartItems.data;
+    this.isLoadingCartItems$ = this.cartFacade.cartItems.isLoading;
+  }
 
   home() {
-    this.navigationService.setPage('home', ['/']);
+    this.appFacade.navigate({ pageName: 'home', pageURI: ['/'] });
   }
 
   ngOnInit(): void {
-    this.cartService.getCartItems(this.cartId).subscribe((response: any) => {
-      console.log(response);
-      this.myItems = response.data;
-    });
+    this.cartFacade.fetchCartItems();
   }
 }

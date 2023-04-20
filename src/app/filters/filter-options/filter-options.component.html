@@ -1,8 +1,8 @@
 <div class="app-product-search-bar">
   <div>
     <div>
-      <select>
-        <option value="'none'">Select Product Type</option>
+      <select [formControl]="categoryFormControl">
+        <option value="">Select Product Type</option>
         <option *ngFor="let category of categories" [value]="category">
           {{ category }}
         </option>
